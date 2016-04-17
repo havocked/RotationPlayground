@@ -7,19 +7,19 @@ extension NSView {
     
     ///The less is the timeToRotate, the more fast the animation is !
     func spinClockwise(timeToRotate: Double) {
-        startRotate(CGFloat(M_PI_2), speed: timeToRotate)
+        startRotate(CGFloat(-1 * M_PI * 2.0), speed: timeToRotate)
     }
     
     ///The less is the timeToRotate, the more fast the animation is !
     func spinAntiClockwise(timeToRotate: Double) {
-        startRotate(CGFloat(-M_PI_2), speed: timeToRotate)
+        startRotate(CGFloat(M_PI * 2.0), speed: timeToRotate)
     }
     
     func startRotate(angle: CGFloat, speed: Double) {
         
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = CGFloat(M_PI * 2.0)
+        rotateAnimation.toValue = angle
         rotateAnimation.duration = speed
         rotateAnimation.repeatCount = .infinity
         
@@ -57,7 +57,7 @@ let time: NSTimeInterval = 5.0
 let delay = dispatch_time(DISPATCH_TIME_NOW,
                           Int64(time * Double(NSEC_PER_SEC)))
 dispatch_after(delay, dispatch_get_main_queue()) {
-    view.stopAnimations()
+    //view.stopAnimations()
 }
 
 XCPlaygroundPage.currentPage.liveView = containerView
